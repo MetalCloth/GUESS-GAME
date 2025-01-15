@@ -1,74 +1,76 @@
-//box1 bnana hai usme 5 loop to create div with class element
-//boxes me box1 daalna hai
-let elemetBox=["NIGGER","REALLY","BUS","BOXES"];
-let data=elemetBox[Math.floor(Math.random()*4)];
+
+let test = ["UHDOOB", "EXW", "ERBBHV", "EUURNHQ", "FHQWHU", "DSSOH", "EUHDG", "FDQGB", "GRJ", "HDJOH", "IURJ", "JUDSH", "KRXVH", "LVODQG", "MDNHW", "NLWWHQ", "OXQFK", "PDQJR", "QLJKW", "ROLYH", "SOH", "SUDQH", "WDEHLW", "VWRU", "WLJHU"];
+let elemetBox = test.map(word => decrypt(word, 3));
+let data=elemetBox[Math.floor(Math.random()*(elemetBox.length-1))];
+let y = document.getElementById('you-lose');
 let boxes=document.querySelector(".boxes");
 let f=0;
 let k=0;
 let m=false
-let hint=Math.floor(Math.random()*5);
+
+
+let hint=Math.floor(Math.random()*(data.length-1));
+
 let occurance=1;
 if(data.length==3){
     occurance=0;
 }
-console.log(occurance);
 let count=0;
 let over=false;
 let exception=true;
 let a;
 let box1=document.createElement("div");
 for(let i=count;i<data.length;i++){
-        a=document.createElement("input");
-        a.style.border="none";
-        a.style.fontFamily="Times New Roman";
-        if(f==0 && i==hint){
-            a=document.createElement("div");
-            a.textContent=data[i];
-            f=1;
-        }
-        a.id="element"+i;
-        a.classList.add("element");
-        
-        console.log(a);
-        a.inputMode="enabled";
-        
+    a=document.createElement("input");
+    a.style.border="none";
+    a.style.fontFamily="Times New Roman";
+    if(f==0 && i==hint){
+        a=document.createElement("div");
+        a.textContent=data[i];
+        f=1;
+    }
+    a.id="element"+i;
+    a.classList.add("element");
+    
+    a.inputMode="enabled";
+    
     box1.classList.add("box1");
     box1.appendChild(a);
 }
 
 box1.lastChild.addEventListener("keyup",(e)=>{
-    if(e.key=="Enter" && e.target.value!="" && !e.target.classList.contains("x")){
+    if(e.key=="Enter" && e.target.value!="" && !e.target.classList.contains("x") ){
         checking();
         e.target.classList.add("x");
         checkErrors();
     }
+    
 });
 count=data.length;
 let h=document.getElementById("element"+0);
-console.log(boxes)
 
 box1.addEventListener("keyup",(e)=>{
-    console.log(e.target.value);
     if(e.key==="Backspace" && e.target.value=="" || e.target.value==null){
         if(e.target.previousSibling.innerText==data[hint] && m==false){
             m=true;
-           e.target.previousSibling.previousSibling.focus();
-       }
-       else{
-
-           console.log("PREV SIBLING");
-           e.target.previousSibling.focus();
-       }
+            e.target.previousSibling.previousSibling.focus();
+        }
+        else{
+            
+            e.target.previousSibling.focus();
+        }
     }
     
     else if(e.target.nextSibling!=null && e.target.value!=""){
         if(e.target.nextSibling.innerText==data[hint]){
-            e.target.nextSibling.nextSibling.focus();
+            if(e.target.nextSibling.nextSibling!=null){
+                
+                e.target.nextSibling.nextSibling.focus();
+            }
         }
         else{
-        console.log("NEXT SIBLING");
-        m=false
-        e.target.nextSibling.focus();
+            m=false
+            e.target.nextSibling.focus();
         }
     }
     if(e.target.value.length>1){
@@ -80,17 +82,26 @@ box1.addEventListener("keyup",(e)=>{
         }
     }
     
-     if( e.target.nextSibling.innerText==data[hint] && m==false){
-        e.target.nextSibling.nextSibling.focus();
+    if( e.target.nextSibling.innerText==data[hint] && m==false){
+        if(e.target.nextSibling.nextSibling!=null){
+            
+            e.target.nextSibling.nextSibling.focus();
+        }
     }
-    console.log(e.target.innerText);
-
+    
     
 })
-box1.addEventListener("click",(e)=>{
-    console.log("CLICLED");
-    console.log(e.target.value);
-})
+function decrypt(str, shift) {
+    return str.split('')
+              .map(char => {
+                  let code = char.charCodeAt(0);
+                  if (code >= 65 && code <= 90) {
+                      return String.fromCharCode(((code - 65 - shift + 26) % 26) + 65);
+                  }
+                  return char;
+              })
+              .join('');
+}
 
 boxes.appendChild(box1);
 
@@ -98,14 +109,11 @@ boxes.appendChild(box1);
 function checkErrors(){
 checking();
 if(!over){
-console.log("PREM KI NAYYA");
-console.log(occurance);
 let f=0;
 let z=0;
 let a;
 for(let i=count-data.length;i<count;i++){
     a=document.getElementById("element"+i);
-    console.log(a);
     a.readOnly=true;
 
 }
@@ -129,8 +137,6 @@ for(let i=count;i<data.length+count;i++){
     box1.lastChild.addEventListener("keyup",(e)=>{
         if(e.key=="Enter" && e.target.value!="" && !e.target.classList.contains("x")){
 
-            console.log(occurance);
-            console.log("ENTER");
             occurance++;
             e.target.classList.add("x");    
             checkErrors();
@@ -141,7 +147,6 @@ for(let i=count;i<data.length+count;i++){
     box1.addEventListener("keyup",(e)=>{
         if(e.key==="Backspace" && e.target.value=="" || e.target.value==null){
             e.target.previousSibling.focus();
-            console.log("PREV SIBLING ACTIVE");
              
         }
         else if(e.target.nextSibling!=null && e.target.value!="" ){
@@ -159,7 +164,6 @@ for(let i=count;i<data.length+count;i++){
         if( e.target.nextSibling.innerText==data[hint]){
             e.target.nextSibling.nextSibling.focus();
         }
-        console.log("HHH");
         
     })
 }
@@ -171,7 +175,7 @@ m.focus();
 }
 }
 function checking(){
-    if(occurance<data.length-2){
+    if(occurance<data.length+2){
     k=0;
     
     for(let i=count-data.length;i<count;i++){
@@ -210,19 +214,18 @@ else{
     YouLose();
     }
 }
-    
 }
 
 function gameOver() {
-    console.log("TTETETETE");
+    let b=document.getElementById("congo");
+    b.innerText="CONGRATULATION !!";
+    b.style.color='#007FFF';
     for(let i=count-data.length;i<count;i++){
         a=document.getElementById("element"+i);
         a.readOnly=true;
     }
     over=true;
-    console.log(count);
-    console.log("Congrats!!")
-    document.body.style.backgroundColor = "red";
+
 }
 function YouLose(){
     for(let i=count-data.length;i<count;i++){
@@ -240,8 +243,6 @@ function YouLose(){
         x.style.color="white";
         
     }
-    console.log('hhhhhhhhhhhhhh');
-    console.log(k);
     if(k>=data.length){
         gameOver();
     }
@@ -255,9 +256,12 @@ function YouLose(){
         a=document.getElementById("element"+i);
         a.readOnly=true;
     }
-    console.log("HHHHH");
-    console.log(k);
-    console.log("YOU LOSE");
+    y.classList.remove('hidden');
+    setTimeout(() => {
+        y.innerText = `WORD WAS : ${data}`;
+    }, 1500);
     }
     }
+
+
 
