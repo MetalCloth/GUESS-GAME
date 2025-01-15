@@ -72,12 +72,12 @@ input :disabled{
     }
     h1{
         margin-left: 8px;
+        margin-bottom: 30px;
+
     }
 }
 @media screen and (max-width: 630px) and (min-width: 559px) {
-    body{
-        background-color: aqua;
-    }
+    
     .element{
         height: 70px;
         width: 70px;
