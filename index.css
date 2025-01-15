@@ -27,6 +27,8 @@ h1{
     font-weight:900;   
     font-size: 3rem;
     font-family: 'Roboto', sans-serif;
+     margin-bottom: 30px;
+
 }
 .box1{
     position: relative;
@@ -72,7 +74,6 @@ input :disabled{
     }
     h1{
         margin-left: 8px;
-        margin-bottom: 30px;
 
     }
 }
