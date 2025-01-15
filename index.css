@@ -61,5 +61,40 @@ input :disabled{
     background-color: pink;
     cursor: not-allowed;
 }
-
+@media screen and (max-width: 630px) and (min-width: 0px) {
+    
+    .element{
+        height: 43px;
+        width: 43px;
+        border-radius: 8px;
+        margin: 5px;
+        font-size: 22px;
+    }
+    h1{
+        margin-left: 8px;
+    }
+}
+@media screen and (max-width: 630px) and (min-width: 559px) {
+    body{
+        background-color: aqua;
+    }
+    .element{
+        height: 70px;
+        width: 70px;
+        border-radius: 8px;
+        margin: 12px;
+        font-size: 30px;
+    }
+    
+}
+@media screen and (max-width: 555px) and (min-width: 370px) {
+    
+    .element{
+        height: 47px;
+        width: 47px;
+        border-radius: 8px;
+        margin: 7px
+    }
+    
+}
 
